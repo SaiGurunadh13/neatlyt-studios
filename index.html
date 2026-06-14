@@ -1,26 +1,46 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Neatlyt Studio — Visual Creative Agency</title>
+<title>Neatlyt Studio - Visual Creative Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="images/logo.png"/>
+<link rel="shortcut icon" href="images/logo.png"/>
+<script>
+(function(){
+  if (new URLSearchParams(window.location.search || '').has('admin')) {
+    document.documentElement.classList.add('admin-route');
+  }
+})();
+</script>
 <style>
-/* ─── RESET ─────────────────────────────── */
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;border:none;background:none;font:inherit}
 a{text-decoration:none;color:inherit}
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
 
-/* ─── TOKENS ─────────────────────────────── */
+
 :root{
-  --ink:       #0C0C0E;
-  --ink-2:     #18181C;
-  --ink-3:     #242428;
+  --ink:       #000000;
+  --ink-2:     #000000;
+  --ink-3:     #000000;
   --surface:   #F7F6F3;
-  --muted:     #8A8A92;
+  --muted:     #83839a;
   --rule:      rgba(255,255,255,0.07);
   --gold:      #C9A84C;
   --gold-lt:   #E2C47A;
@@ -35,7 +55,6 @@ a{text-decoration:none;color:inherit}
   --ease-in-out: cubic-bezier(0.65,0,0.35,1);
 }
 
-/* ─── BASE ───────────────────────────────── */
 body{
   background:var(--ink);
   color:var(--white);
@@ -46,7 +65,6 @@ body{
   overflow-x:hidden;
 }
 
-/* ─── CURSOR DOT ─────────────────────────── */
 #cursor{
   position:fixed;width:8px;height:8px;border-radius:50%;
   background:var(--gold);pointer-events:none;z-index:9999;
@@ -61,14 +79,12 @@ body{
 }
 body:hover #cursor{opacity:1}
 
-/* ─── NOISE OVERLAY ──────────────────────── */
 body::before{
   content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   opacity:0.6;mix-blend-mode:overlay;
 }
 
-/* ─── NAV ────────────────────────────────── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:500;
   display:flex;align-items:center;justify-content:space-between;
@@ -82,11 +98,16 @@ nav.scrolled{
   border-bottom:1px solid var(--rule);
 }
 .nav-logo{
-  display:flex;align-items:baseline;gap:3px;
-  font-family:var(--font-ui);font-weight:600;font-size:1rem;
-  letter-spacing:0.12em;text-transform:uppercase;color:var(--white);
+  display:flex;align-items:center;gap:12px;
+  color:var(--white);
+  line-height:1;
 }
-.nav-logo-dot{color:var(--gold);font-size:1.4rem;line-height:0;margin-bottom:-4px}
+.nav-logo img{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  display:block;
+}
 .nav-center{
   display:flex;gap:40px;
   position:absolute;left:50%;transform:translateX(-50%);
@@ -120,8 +141,13 @@ nav.scrolled{
   transition:background 0.25s,color 0.25s,border-color 0.25s;
 }
 .btn-nav:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn-nav-admin{
+  background:rgba(201,168,76,0.08);
+}
+.btn-nav-admin:hover{
+  background:var(--gold);
+}
 
-/* ─── HERO ───────────────────────────────── */
 #hero{
   min-height:100vh;position:relative;
   display:grid;place-items:center;
@@ -222,7 +248,6 @@ nav.scrolled{
 }
 .award-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
-/* ─── MARQUEE ────────────────────────────── */
 .marquee-wrap{
   border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
@@ -240,7 +265,6 @@ nav.scrolled{
 }
 .marquee-sep{color:var(--gold);font-size:0.8rem}
 
-/* ─── SECTION COMMONS ────────────────────── */
 .section{padding:140px 64px}
 .section-header{margin-bottom:80px}
 .overline{
@@ -257,7 +281,6 @@ nav.scrolled{
 }
 .section-h2 em{font-style:italic;color:var(--gold-lt)}
 
-/* ─── ABOUT SPLIT ────────────────────────── */
 #about{
   display:grid;grid-template-columns:1fr 1fr;gap:0;
   padding:0;
@@ -308,7 +331,6 @@ nav.scrolled{
   letter-spacing:0.1em;color:rgba(250,250,250,0.3);
 }
 
-/* ─── SERVICES ───────────────────────────── */
 #services{background:var(--ink-2)}
 .services-grid{
   display:grid;grid-template-columns:repeat(2,1fr);
@@ -362,7 +384,6 @@ nav.scrolled{
 }
 .service-card:hover .service-card-num{color:rgba(201,168,76,0.06)}
 
-/* ─── PROCESS ────────────────────────────── */
 #process{position:relative}
 .process-row{
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -396,7 +417,6 @@ nav.scrolled{
 }
 .process-step:last-child .process-connector{display:none}
 
-/* ─── PORTFOLIO ──────────────────────────── */
 #portfolio{padding:0}
 .portfolio-header{padding:100px 64px 64px}
 .portfolio-grid{
@@ -443,14 +463,12 @@ nav.scrolled{
 .port-item:hover .port-cat,
 .port-item:hover .port-title{transform:translateY(0)}
 
-/* colour blocks for portfolio */
 .port-item:nth-child(1) .port-visual{background:linear-gradient(135deg,#0f0e0a 0%,#1e1a0e 100%)}
 .port-item:nth-child(2) .port-visual{background:linear-gradient(135deg,#0a0a12 0%,#12101e 100%)}
 .port-item:nth-child(3) .port-visual{background:linear-gradient(135deg,#0a0f0a 0%,#0f1a0f 100%)}
 .port-item:nth-child(4) .port-visual{background:linear-gradient(135deg,#110a0a 0%,#1e1010 100%)}
 .port-item:nth-child(5) .port-visual{background:linear-gradient(135deg,#0a0e14 0%,#0e1420 100%)}
 
-/* ─── TESTIMONIALS ───────────────────────── */
 #testimonials{background:var(--ink-2);padding:140px 64px}
 .testi-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
@@ -478,7 +496,6 @@ nav.scrolled{
 }
 .testi-stars{color:var(--gold);font-size:0.7rem;margin-bottom:20px;letter-spacing:2px}
 
-/* ─── CTA ────────────────────────────────── */
 #cta{
   padding:180px 64px;text-align:center;
   position:relative;overflow:hidden;
@@ -526,7 +543,6 @@ nav.scrolled{
 }
 .btn-cta-outline:hover{border-color:var(--gold);color:var(--gold)}
 
-/* ─── FOOTER ─────────────────────────────── */
 footer{
   border-top:1px solid var(--rule);
   background:var(--ink);
@@ -538,10 +554,16 @@ footer{
 }
 .footer-brand{}
 .footer-logo-text{
-  font-family:var(--font-ui);font-weight:600;font-size:1rem;
-  letter-spacing:0.14em;text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-.footer-logo-text span{color:var(--gold)}
+.footer-logo-text img{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  display:block;
+}
 .footer-tagline{
   font-size:0.8rem;font-weight:300;
   color:rgba(250,250,250,0.3);margin-top:12px;line-height:1.7;
@@ -567,17 +589,14 @@ footer{
 .footer-bottom a{color:rgba(250,250,250,0.2);transition:color 0.2s}
 .footer-bottom a:hover{color:var(--muted)}
 
-/* ─── REVEAL ANIMATIONS ──────────────────── */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s var(--ease-out),transform 0.8s var(--ease-out)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ─── KEYFRAMES ──────────────────────────── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes scrollTrack{0%{left:0;width:0%}50%{left:0;width:60%}100%{left:100%;width:0%}}
 
-/* ─── RESPONSIVE ─────────────────────────── */
 @media(max-width:1024px){
   nav{padding:24px 32px}
   nav.scrolled{padding:14px 32px}
@@ -616,44 +635,915 @@ footer{
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
 }
+
+#admin{
+  padding:140px 64px 180px;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 0%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.01) 0%, transparent 24%),
+    var(--ink);
+}
+.admin-shell{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr);
+  gap:24px;
+  align-items:start;
+}
+.admin-sidebar{
+  position:sticky;
+  top:100px;
+  grid-row:1 / span 2;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  padding:28px;
+  border:1px solid var(--rule);
+  background:rgba(24,24,28,0.94);
+  backdrop-filter:blur(18px) saturate(160%);
+}
+.admin-kicker{
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.admin-sidebar h3{
+  font-family:var(--font-display);
+  font-size:2rem;
+  font-weight:300;
+  line-height:1.05;
+  margin-bottom:10px;
+}
+.admin-sidebar p{
+  font-size:0.84rem;
+  color:rgba(250,250,250,0.45);
+  line-height:1.8;
+}
+.admin-demo{
+  padding:18px 16px;
+  border:1px solid rgba(201,168,76,0.16);
+  background:rgba(201,168,76,0.03);
+  display:grid;
+  gap:10px;
+}
+.admin-demo-label{
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold-lt);
+}
+.admin-demo-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  font-size:0.76rem;
+  color:rgba(250,250,250,0.42);
+}
+.admin-demo-row strong{
+  color:var(--white);
+  font-weight:600;
+}
+.admin-auth{
+  border:1px solid var(--rule);
+  background:rgba(24,24,28,0.92);
+  padding:28px;
+  display:flex;
+  align-items:flex-start;
+  grid-column:2;
+}
+.admin-auth-card{
+  width:100%;
+  display:grid;
+  gap:14px;
+}
+.admin-auth-card h4{
+  font-family:var(--font-display);
+  font-size:1.8rem;
+  font-weight:300;
+  line-height:1.1;
+}
+.admin-auth-card p{
+  font-size:0.84rem;
+  color:rgba(250,250,250,0.42);
+  line-height:1.8;
+}
+.admin-auth-form{
+  display:grid;
+  gap:12px;
+}
+.admin-auth-status{
+  min-height:1.2em;
+  font-size:0.78rem;
+  color:var(--gold-lt);
+}
+.admin-manager[hidden]{display:none !important}
+.admin-manager{
+  grid-column:2;
+  display:grid;
+  gap:24px;
+}
+.admin-tabs{display:grid;gap:10px}
+.admin-tab{
+  width:100%;
+  padding:14px 16px;
+  text-align:left;
+  border:1px solid var(--rule);
+  background:rgba(255,255,255,0.02);
+  color:rgba(250,250,250,0.52);
+  font-family:var(--font-ui);
+  font-size:0.72rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  transition:background 0.25s,color 0.25s,border-color 0.25s,transform 0.2s;
+}
+.admin-tab:hover{
+  background:rgba(201,168,76,0.06);
+  color:var(--white);
+  border-color:rgba(201,168,76,0.22);
+}
+.admin-tab.active{
+  background:var(--gold);
+  color:var(--ink);
+  border-color:var(--gold);
+}
+.admin-main{
+  border:1px solid var(--rule);
+  background:rgba(24,24,28,0.9);
+  padding:30px;
+}
+.admin-panel{display:none;animation:fadeUp 0.45s var(--ease-out)}
+.admin-panel.active{display:block}
+.admin-panel-head{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:22px;
+}
+.admin-panel-head h4{
+  font-family:var(--font-display);
+  font-size:1.8rem;
+  font-weight:300;
+  line-height:1.1;
+}
+.admin-panel-head p{
+  font-size:0.84rem;
+  color:rgba(250,250,250,0.42);
+  line-height:1.8;
+}
+.admin-list{
+  display:grid;
+  gap:12px;
+  margin-bottom:24px;
+}
+.admin-item{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:16px 18px;
+  border:1px solid var(--rule);
+  background:rgba(255,255,255,0.02);
+}
+.admin-item-main{min-width:0}
+.admin-item-title{
+  font-family:var(--font-ui);
+  font-size:0.82rem;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.admin-item-sub{
+  font-size:0.78rem;
+  color:rgba(250,250,250,0.45);
+  line-height:1.6;
+}
+.admin-item-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  justify-content:flex-end;
+}
+.admin-action{
+  padding:9px 12px;
+  border:1px solid var(--rule);
+  background:transparent;
+  color:var(--white);
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.admin-action:hover{
+  background:rgba(201,168,76,0.09);
+  border-color:rgba(201,168,76,0.24);
+}
+.admin-action.danger:hover{
+  background:rgba(220,80,80,0.1);
+  border-color:rgba(220,80,80,0.32);
+}
+.admin-form{
+  display:grid;
+  gap:12px;
+  padding:18px;
+  border:1px solid var(--rule);
+  background:rgba(255,255,255,0.02);
+}
+.admin-form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.admin-form label{display:grid;gap:8px}
+.admin-form span{
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.admin-form input,
+.admin-form textarea,
+.admin-form select{
+  width:100%;
+  padding:14px 14px;
+  border:1px solid var(--rule);
+  background:rgba(12,12,14,0.9);
+  color:var(--white);
+  font-family:var(--font-body);
+  font-size:0.9rem;
+  outline:none;
+  transition:border-color 0.2s,background 0.2s;
+}
+.admin-form textarea{min-height:120px;resize:vertical}
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus{
+  border-color:rgba(201,168,76,0.55);
+  background:rgba(12,12,14,1);
+}
+.admin-form-actions{display:flex;gap:10px;flex-wrap:wrap}
+.admin-submit,
+.admin-cancel{
+  padding:12px 18px;
+  border:1px solid var(--rule);
+  font-family:var(--font-ui);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.admin-submit{
+  background:var(--gold);
+  color:var(--ink);
+  border-color:var(--gold);
+}
+.admin-submit:hover{background:var(--gold-lt)}
+.admin-cancel{
+  background:transparent;
+  color:var(--white);
+}
+.admin-cancel:hover{
+  background:rgba(255,255,255,0.04);
+  border-color:rgba(255,255,255,0.16);
+}
+.empty-state{
+  padding:24px;
+  border:1px dashed rgba(201,168,76,0.18);
+  color:rgba(250,250,250,0.42);
+  font-size:0.84rem;
+  line-height:1.8;
+}
+
+@media(max-width:1024px){
+  #admin{padding:100px 32px 140px}
+  .admin-shell{grid-template-columns:1fr}
+  .admin-sidebar{position:static}
+  .admin-main{padding:24px}
+  .admin-form-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:640px){
+  #admin{padding:80px 20px 120px}
+  .admin-sidebar,
+  .admin-main{padding:20px}
+  .admin-item{flex-direction:column}
+  .admin-item-actions{justify-content:flex-start}
+}
+
+html.admin-route body{
+  overflow:hidden;
+  background:#040405;
+}
+html.admin-route body > :not(#admin-app){
+  display:none !important;
+}
+html.admin-route #cursor,
+html.admin-route #cursor-ring{
+  display:none !important;
+}
+
+#admin-app{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(201,168,76,0.08), transparent 34%),
+    radial-gradient(circle at 92% 8%, rgba(201,168,76,0.05), transparent 22%),
+    linear-gradient(180deg, #070708 0%, #040405 100%);
+  color:var(--white);
+}
+html.admin-route #admin-app{
+  display:block;
+}
+
+#admin-app,
+#admin-app *{
+  box-sizing:border-box;
+}
+
+.admin-login-screen,
+.admin-dashboard{
+  width:100%;
+  height:100%;
+}
+
+.admin-login-screen{
+  display:grid;
+  grid-template-columns:40% 60%;
+}
+
+.admin-login-left,
+.admin-login-right{
+  min-height:100vh;
+  padding:48px;
+}
+
+.admin-login-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border-right:1px solid rgba(201,168,76,0.14);
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.03), transparent 42%),
+    rgba(7,7,9,0.92);
+}
+
+.admin-brand-overline,
+.admin-section-overline,
+.admin-label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:var(--font-ui);
+  font-size:0.65rem;
+  font-weight:700;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+.admin-brand-overline::before,
+.admin-section-overline::before,
+.admin-label::before{
+  content:'';
+  width:34px;
+  height:1px;
+  background:var(--gold);
+  flex-shrink:0;
+}
+
+.admin-login-copy{
+  display:grid;
+  gap:22px;
+  max-width:460px;
+}
+
+.admin-login-copy h1{
+  font-family:var(--font-display);
+  font-weight:300;
+  font-size:clamp(3rem,5vw,5rem);
+  line-height:0.96;
+}
+
+.admin-login-copy p{
+  max-width:40ch;
+  color:rgba(250,250,250,0.56);
+  font-size:0.94rem;
+  line-height:1.9;
+}
+
+.admin-login-right{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.admin-login-card{
+  width:min(540px,100%);
+  display:grid;
+  gap:20px;
+  padding:36px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(10,10,12,0.86);
+  box-shadow:0 24px 80px rgba(0,0,0,0.32);
+}
+
+.admin-login-card h2{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3vw,3rem);
+  font-weight:300;
+  line-height:1;
+}
+
+.admin-login-card p{
+  color:rgba(250,250,250,0.48);
+  font-size:0.88rem;
+  line-height:1.8;
+}
+
+.admin-login-form{
+  display:grid;
+  gap:14px;
+}
+
+.admin-login-form label,
+.admin-form label{
+  display:grid;
+  gap:8px;
+}
+
+.admin-login-form span,
+.admin-form span{
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.admin-login-form input,
+.admin-login-form textarea,
+.admin-login-form select{
+  width:100%;
+  padding:15px 16px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(6,6,7,0.92);
+  color:var(--white);
+  font:inherit;
+  outline:none;
+}
+
+.admin-login-form input:focus{
+  border-color:rgba(201,168,76,0.55);
+}
+
+.admin-login-status{
+  min-height:1.2em;
+  color:var(--gold-lt);
+  font-size:0.78rem;
+}
+.admin-login-status[data-state="error"]{color:var(--gold-lt)}
+.admin-login-status[data-state="success"]{color:var(--gold)}
+
+.admin-login-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+
+.admin-back-link{
+  color:rgba(250,250,250,0.48);
+  font-family:var(--font-ui);
+  font-size:0.72rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+.admin-back-link:hover{color:var(--white)}
+
+.admin-dashboard{
+  display:none;
+  grid-template-rows:auto minmax(0,1fr);
+}
+.admin-dashboard.is-active{display:grid}
+
+.admin-topbar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:16px;
+  padding:20px 28px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  background:rgba(7,7,8,0.86);
+  backdrop-filter:blur(18px) saturate(160%);
+}
+
+.admin-topbar-logo,
+.admin-topbar-center,
+.admin-topbar-user{
+  font-family:var(--font-ui);
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+
+.admin-topbar-logo{
+  font-size:0.8rem;
+  font-weight:700;
+}
+
+.admin-topbar-center{
+  justify-self:center;
+  font-size:0.68rem;
+  color:var(--gold-lt);
+}
+
+.admin-topbar-user{
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:0.62rem;
+  color:rgba(250,250,250,0.56);
+}
+
+.admin-user-chip{
+  padding:7px 10px;
+  border:1px solid rgba(201,168,76,0.18);
+  color:var(--white);
+}
+
+.admin-topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.admin-topbar-button{
+  padding:10px 14px;
+  border:1px solid rgba(201,168,76,0.2);
+  background:transparent;
+  color:var(--gold-lt);
+  font-family:var(--font-ui);
+  font-size:0.64rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+}
+
+.admin-topbar-button:hover{
+  background:rgba(201,168,76,0.08);
+}
+
+.admin-shell{
+  min-height:0;
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+}
+
+.admin-sidebar{
+  padding:24px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  background:rgba(8,8,10,0.9);
+  overflow:auto;
+}
+
+.admin-sidebar-group{
+  display:grid;
+  gap:8px;
+  margin-bottom:24px;
+}
+
+.admin-sidebar-label{
+  display:block;
+  margin-bottom:6px;
+  color:rgba(250,250,250,0.34);
+  font-family:var(--font-ui);
+  font-size:0.6rem;
+  font-weight:700;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+}
+
+.admin-nav-button{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  padding:13px 14px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.02);
+  color:rgba(250,250,250,0.68);
+  font-family:var(--font-ui);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  text-align:left;
+}
+
+.admin-nav-button svg{
+  width:16px;
+  height:16px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  flex-shrink:0;
+}
+
+.admin-nav-button:hover{
+  border-color:rgba(201,168,76,0.22);
+  background:rgba(201,168,76,0.05);
+  color:var(--white);
+}
+
+.admin-nav-button.active{
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.12);
+  color:var(--gold-lt);
+}
+
+.admin-sidebar-footer{
+  margin-top:28px;
+  padding:18px;
+  border:1px solid rgba(201,168,76,0.14);
+  background:rgba(201,168,76,0.04);
+  color:rgba(250,250,250,0.5);
+  font-size:0.82rem;
+  line-height:1.7;
+}
+
+.admin-workspace{
+  min-height:0;
+  overflow:auto;
+  padding:28px;
+}
+
+.admin-panel-view{
+  display:none;
+  gap:24px;
+}
+.admin-panel-view.active{display:grid}
+
+.admin-panel-head{
+  display:grid;
+  gap:12px;
+}
+
+.admin-panel-head h2,
+.admin-panel-head h3{
+  font-family:var(--font-display);
+  font-weight:300;
+  line-height:1;
+}
+
+.admin-panel-head h2{font-size:clamp(2rem,3.5vw,3.4rem)}
+.admin-panel-head h3{font-size:clamp(1.6rem,2.6vw,2.4rem)}
+
+.admin-section-overline{
+  font-size:0.62rem;
+}
+
+.admin-chart-bars{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  align-items:end;
+  gap:12px;
+  min-height:240px;
+}
+
+.admin-bar{
+  display:grid;
+  gap:10px;
+  align-items:end;
+  justify-items:center;
+}
+
+.admin-bar-fill{
+  width:100%;
+  min-height:24px;
+  border-radius:14px 14px 4px 4px;
+  background:linear-gradient(180deg, rgba(201,168,76,0.95), rgba(201,168,76,0.22));
+}
+
+.admin-bar-label{
+  color:rgba(250,250,250,0.46);
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
+
+.admin-table-wrap{
+  overflow:auto;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.02);
+}
+
+.admin-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+}
+
+.admin-table th,
+.admin-table td{
+  padding:14px 16px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  text-align:left;
+  vertical-align:top;
+  font-size:0.84rem;
+}
+
+.admin-table th{
+  color:rgba(250,250,250,0.42);
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+}
+
+.admin-table tbody tr:hover{
+  background:rgba(255,255,255,0.02);
+}
+
+.admin-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border:1px solid rgba(201,168,76,0.18);
+  color:var(--gold-lt);
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+}
+
+.admin-inline-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.admin-content-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.admin-content-tab{
+  padding:11px 14px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.02);
+  color:rgba(250,250,250,0.62);
+  font-family:var(--font-ui);
+  font-size:0.68rem;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+
+.admin-content-tab.active{
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.12);
+  color:var(--gold-lt);
+}
+
+.admin-content-pane{
+  display:none;
+  gap:20px;
+}
+.admin-content-pane.active{display:grid}
+
+.admin-panel-stack{
+  display:grid;
+  gap:20px;
+}
+
+.admin-form{
+  gap:12px;
+  padding:18px;
+}
+
+.admin-form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.admin-form textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select{
+  width:100%;
+  padding:14px 14px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(6,6,7,0.92);
+  color:var(--white);
+  font:inherit;
+  outline:none;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus{
+  border-color:rgba(201,168,76,0.55);
+}
+
+.admin-helper-text{
+  color:rgba(250,250,250,0.42);
+  font-size:0.8rem;
+  line-height:1.7;
+}
+
+@media(max-width:1100px){
+  .admin-login-screen{grid-template-columns:1fr}
+  .admin-login-left{min-height:auto;border-right:none;border-bottom:1px solid rgba(201,168,76,0.14)}
+  .admin-login-left,
+  .admin-login-right{padding:28px}
+  .admin-shell{grid-template-columns:1fr}
+  .admin-sidebar{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08)}
+}
+
+@media(max-width:720px){
+  .admin-topbar{
+    grid-template-columns:1fr;
+    justify-items:start;
+  }
+  .admin-topbar-center,
+  .admin-topbar-user{
+    justify-self:start;
+  }
+  .admin-topbar-actions{
+    flex-wrap:wrap;
+  }
+  .admin-workspace{padding:20px}
+  .admin-form-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">Neatlyt<span class="nav-logo-dot">·</span></a>
+  <a href="#" class="nav-logo" aria-label="Neatlyt home">
+    <img src="images/logo.png" alt="" aria-hidden="true"/>
+    <span class="sr-only">Neatlyt</span>
+  </a>
   <div class="nav-center">
-    <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#portfolio">Work</a>
     <a href="#process">Process</a>
   </div>
   <div class="nav-right">
-    <a href="mailto:hello@neatlyt.com" class="nav-contact">hello@neatlyt.com</a>
+    <a href="?admin" class="btn-nav btn-nav-admin">Admin</a>
     <a href="#cta" class="btn-nav">Get in Touch</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-ambient"></div>
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-pretitle">
       <div class="hero-pretitle-line"></div>
-      <span>Visual Creative Agency &mdash; Est. 2021</span>
+      <span>Visual Creative Agency - Est. 2024</span>
     </div>
     <h1 class="hero-h1">
       We Turn Raw&nbsp;Ideas<br>
       Into <em>Visual Gold.</em>
     </h1>
     <p class="hero-desc">
-      Neatlyt Studio crafts high-performance creative assets — thumbnails, videos, photography, and graphic systems — that make your brand impossible to scroll past.
+      Neatlyt Studio crafts high-performance creative assets - thumbnails, videos, photography, and graphic systems - that make your brand impossible to scroll past.
     </p>
     <div class="hero-actions">
       <a href="#cta" class="btn-primary">
@@ -671,50 +1561,44 @@ footer{
     <span>Scroll to explore</span>
   </div>
   <div class="hero-awards">
-    <div class="award-pill"><div class="award-pill-dot"></div>500+ Projects Delivered</div>
-    <div class="award-pill"><div class="award-pill-dot"></div>48h Average Turnaround</div>
-    <div class="award-pill"><div class="award-pill-dot"></div>3× CTR Improvement</div>
+    <div class="award-pill"><div class="award-pill-dot"></div>200+ Projects Delivered</div>
+    <div class="award-pill"><div class="award-pill-dot"></div>Depends on Job</div>
+    <div class="award-pill"><div class="award-pill-dot"></div>3x CTR Improvement</div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <div class="marquee-item">Thumbnail Design <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Video Editing <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Photo Retouching <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Brand Identity <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Graphic Design <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Social Creatives <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Thumbnail Design <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Video Editing <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Photo Retouching <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Brand Identity <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Graphic Design <span class="marquee-sep">✦</span></div>
-    <div class="marquee-item">Social Creatives <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Thumbnail Design <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Video Editing <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Photo Retouching <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Brand Identity <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Graphic Design <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Social Creatives <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Thumbnail Design <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Video Editing <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Photo Retouching <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Brand Identity <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Graphic Design <span class="marquee-sep">|</span></div>
+    <div class="marquee-item">Social Creatives <span class="marquee-sep">|</span></div>
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="about-left reveal">
     <div class="overline"><div class="overline-rule"></div>About the Studio</div>
     <h2 class="section-h2">We Design for<br><em>Impact, Not Aesthetics.</em></h2>
     <div class="about-stat-grid">
       <div class="about-stat">
-        <div class="stat-num">500+</div>
+        <div class="stat-num">200+</div>
         <div class="stat-label">Projects Delivered</div>
       </div>
       <div class="about-stat">
-        <div class="stat-num">98%</div>
-        <div class="stat-label">Client Retention</div>
-      </div>
-      <div class="about-stat">
-        <div class="stat-num">3×</div>
+        <div class="stat-num">3x</div>
         <div class="stat-label">Avg CTR Uplift</div>
       </div>
       <div class="about-stat">
-        <div class="stat-num">48h</div>
+        <div class="stat-num">Depends on Job</div>
         <div class="stat-label">Turnaround Time</div>
       </div>
     </div>
@@ -722,76 +1606,21 @@ footer{
   <div class="about-right reveal">
     <div class="overline"><div class="overline-rule"></div>Our Philosophy</div>
     <div class="about-body">
-      <p>Neatlyt Studio exists at the intersection of strategy and craft. Every asset we produce is engineered to perform — measured in clicks, views, conversions, and growth — not just compliments.</p>
+      <p>Neatlyt Studio exists at the intersection of strategy and craft. Every asset we produce is engineered to perform - measured in clicks, views, conversions, and growth - not just compliments.</p>
       <p>We work with content creators, personal brands, and businesses who understand that visual communication is a commercial asset, not a cosmetic one.</p>
       <p>From a single thumbnail to a complete brand visual system, we bring the same analytical rigour and creative precision to every brief.</p>
-    </div>
-    <div class="about-clients">
-      <div class="about-clients-label">Trusted by creators &amp; brands across</div>
-      <div class="client-list">
-        <div class="client-tag">YouTube</div>
-        <div class="client-tag">Instagram</div>
-        <div class="client-tag">TikTok</div>
-        <div class="client-tag">E-Commerce</div>
-        <div class="client-tag">SaaS</div>
-        <div class="client-tag">Podcasts</div>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services" class="section">
   <div class="section-header reveal">
     <div class="overline"><div class="overline-rule"></div>What We Do</div>
     <h2 class="section-h2">Precision-Built<br><em>Creative Services.</em></h2>
   </div>
-  <div class="services-grid reveal">
-
-    <div class="service-card">
-      <div class="service-card-num">I</div>
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
-      </div>
-      <h3>Thumbnail Design</h3>
-      <p>Conversion-engineered visuals built to dominate search results, spike CTR, and hold attention before a single frame plays.</p>
-      <div class="service-card-link">Explore Service <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-num">II</div>
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </div>
-      <h3>Video Editing</h3>
-      <p>Cinematic pacing, tight narrative structure, and platform-native hooks. We edit for retention metrics, not just aesthetics.</p>
-      <div class="service-card-link">Explore Service <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-num">III</div>
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      </div>
-      <h3>Photo Editing</h3>
-      <p>Brand-coherent retouching, colour grading, and composite work that elevates every product shot, portrait, or campaign image.</p>
-      <div class="service-card-link">Explore Service <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-num">IV</div>
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      </div>
-      <h3>Graphic Design</h3>
-      <p>Logos, brand systems, social templates, and digital collateral. A complete visual language built to scale with your business.</p>
-      <div class="service-card-link">Explore Service <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></div>
-    </div>
-
-  </div>
+  <div class="services-grid reveal" id="services-grid"></div>
 </section>
 
-<!-- PROCESS -->
 <section id="process" class="section">
   <div class="section-header reveal">
     <div class="overline"><div class="overline-rule"></div>Our Process</div>
@@ -801,7 +1630,7 @@ footer{
     <div class="process-step">
       <span class="process-step-num">i.</span>
       <h3>Discovery</h3>
-      <p>We learn your brand, platform, audience, and goals. No generic brief forms — a real conversation about what you need to achieve.</p>
+      <p>We learn your brand, platform, audience, and goals. No generic brief forms - a real conversation about what you need to achieve.</p>
       <div class="process-connector"></div>
     </div>
     <div class="process-step">
@@ -813,7 +1642,7 @@ footer{
     <div class="process-step">
       <span class="process-step-num">iii.</span>
       <h3>Production</h3>
-      <p>First draft within 48 hours. You review, we refine with unlimited revisions until the output is exactly right.</p>
+      <p>First draft timing depends on the job. You review, we refine with unlimited revisions until the output is exactly right.</p>
       <div class="process-connector"></div>
     </div>
     <div class="process-step">
@@ -824,7 +1653,6 @@ footer{
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section id="portfolio">
   <div class="portfolio-header reveal">
     <div class="overline"><div class="overline-rule"></div>Selected Work</div>
@@ -837,7 +1665,7 @@ footer{
       </div>
       <div class="port-overlay">
         <div class="port-cat">Video Editing</div>
-        <div class="port-title">Brand Reveal — Creator Reel 2024</div>
+        <div class="port-title">Brand Reveal - Creator Reel 2024</div>
       </div>
     </div>
     <div class="port-item">
@@ -846,7 +1674,7 @@ footer{
       </div>
       <div class="port-overlay">
         <div class="port-cat">Thumbnail Series</div>
-        <div class="port-title">YouTube Channel — 12-Part Series</div>
+        <div class="port-title">YouTube Channel - 12-Part Series</div>
       </div>
     </div>
     <div class="port-item">
@@ -879,7 +1707,6 @@ footer{
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="section-header reveal">
     <div class="overline"><div class="overline-rule"></div>Client Feedback</div>
@@ -887,21 +1714,21 @@ footer{
   </div>
   <div class="testi-grid reveal">
     <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-quote">"Our thumbnail CTR went from 4.2% to 11.8% after the first batch. That's not design — that's revenue."</div>
+      <div class="testi-stars">*****</div>
+      <div class="testi-quote">"Our thumbnail CTR went from 4.2% to 11.8% after the first batch. That's not design - that's revenue."</div>
       <div class="testi-divider"></div>
       <div class="testi-author-name">Arjun Mehta</div>
       <div class="testi-author-role">YouTube Creator, 480K Subscribers</div>
     </div>
     <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
+      <div class="testi-stars">*****</div>
       <div class="testi-quote">"Working with Neatlyt felt like having an in-house creative director. The quality and turnaround are unmatched."</div>
       <div class="testi-divider"></div>
       <div class="testi-author-name">Priya Sharma</div>
       <div class="testi-author-role">Founder, Bloom Skincare</div>
     </div>
     <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
+      <div class="testi-stars">*****</div>
       <div class="testi-quote">"Every deliverable is production-ready on first delivery. They understood our brand better than agencies three times the price."</div>
       <div class="testi-divider"></div>
       <div class="testi-author-name">Rahul Verma</div>
@@ -910,7 +1737,6 @@ footer{
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta">
   <div class="cta-eyebrow">Ready to Begin?</div>
   <h2 class="cta-h2">Let's Build<br>Something <em>Remarkable.</em></h2>
@@ -926,11 +1752,13 @@ footer{
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="footer-logo-text">Neatlyt<span>·</span></div>
+      <div class="footer-logo-text">
+        <img src="images/logo.png" alt="" aria-hidden="true"/>
+        <span class="sr-only">Neatlyt</span>
+      </div>
       <div class="footer-tagline">A visual creative studio built for brands and creators who refuse to be ignored.</div>
     </div>
     <div class="footer-col">
@@ -954,7 +1782,6 @@ footer{
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="mailto:hello@neatlyt.com">hello@neatlyt.com</a></li>
         <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
         <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
         <li><a href="https://twitter.com" target="_blank">Twitter / X</a></li>
@@ -964,39 +1791,838 @@ footer{
   <div class="footer-bottom">
     <span>&copy; 2026 Neatlyt Studio. All rights reserved.</span>
     <span>Visual Gold. Every Time.</span>
-    <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></span>
+    <span><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></span>
   </div>
 </footer>
 
+<div id="admin-app" hidden>
+  <section class="admin-login-screen" id="admin-login-screen">
+    <div class="admin-login-left">
+      <div class="admin-login-copy">
+        <div class="admin-brand-overline">Admin Dashboard</div>
+        <h1>Content Manager</h1>
+        <p>Isolated access for publishing services, work, testimonials, and the rest of the private dashboard without exposing the public site underneath.</p>
+      </div>
+    </div>
+    <div class="admin-login-right">
+      <div class="admin-login-card">
+        <div class="admin-section-overline">Restricted Access</div>
+        <h2>Sign in to continue</h2>
+        <p>Enter your admin credentials to unlock the private portal.</p>
+        <form class="admin-login-form" id="admin-login-form">
+          <label>
+            <span>Username</span>
+            <input name="username" type="text" placeholder="Username" autocomplete="username" required/>
+          </label>
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" placeholder="Password" autocomplete="current-password" required/>
+          </label>
+          <button type="submit" class="admin-submit">Unlock Portal</button>
+          <div class="admin-login-status" id="admin-login-status" aria-live="polite"></div>
+        </form>
+        <div class="admin-login-footer">
+          <a href="./" class="admin-back-link" id="admin-back-link">&larr; Back to site</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-dashboard" id="admin-dashboard" hidden>
+    <div class="admin-topbar">
+      <div class="admin-topbar-logo">Neatlyt | Admin</div>
+      <div class="admin-topbar-center" id="admin-current-panel">Content Manager</div>
+      <div class="admin-topbar-user">
+        <span class="admin-user-chip">admin</span>
+        <div class="admin-topbar-actions">
+          <button type="button" class="admin-topbar-button" id="admin-view-site">View Site</button>
+          <button type="button" class="admin-topbar-button" id="admin-sign-out">Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar-group">
+          <span class="admin-sidebar-label">Content</span>
+          <button type="button" class="admin-nav-button active" data-panel="content-manager">
+            <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            Content Manager
+          </button>
+        </div>
+        <div class="admin-sidebar-footer">
+          Private access only. Use the content manager to update the live public site state, then switch back with View Site.
+        </div>
+      </aside>
+
+      <main class="admin-workspace">
+        <section class="admin-panel-view active" data-panel-view="content-manager">
+          <div class="admin-panel-head">
+            <div class="admin-section-overline">Content</div>
+            <h2>Content Manager</h2>
+            <p class="admin-helper-text">Update services, portfolio work, and testimonials. Changes stay in state and appear on the public site when you switch back.</p>
+          </div>
+          <div class="admin-content-tabs" role="tablist" aria-label="Content Manager tabs">
+            <button type="button" class="admin-content-tab active" data-content-tab="services">Services</button>
+            <button type="button" class="admin-content-tab" data-content-tab="portfolio">Portfolio / Work</button>
+            <button type="button" class="admin-content-tab" data-content-tab="testimonials">Testimonials</button>
+          </div>
+
+          <div class="admin-content-pane active" data-content-pane="services">
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Service</th><th>Icon</th><th>Description</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="service-admin-list"></tbody>
+              </table>
+            </div>
+            <form class="admin-form admin-panel-stack" id="service-form">
+              <div class="admin-form-grid">
+                <label><span>Service Name</span><input name="serviceName" type="text" placeholder="Thumbnail Design" required/></label>
+                <label><span>Icon</span>
+                  <select name="serviceIcon">
+                    <option value="screen">screen</option>
+                    <option value="play">play</option>
+                    <option value="image">image</option>
+                    <option value="layers">layers</option>
+                  </select>
+                </label>
+                <label><span>&nbsp;</span><button type="submit" class="admin-submit" id="service-submit">Add Service</button></label>
+              </div>
+              <label>
+                <span>Description</span>
+                <textarea name="serviceDescription" placeholder="Conversion-engineered visuals built to dominate search results." required></textarea>
+              </label>
+              <div class="admin-inline-actions">
+                <button type="button" class="admin-cancel" id="service-cancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="admin-content-pane" data-content-pane="portfolio">
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Title</th><th>Category</th><th>Theme</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="portfolio-admin-list"></tbody>
+              </table>
+            </div>
+            <form class="admin-form admin-panel-stack" id="portfolio-form">
+              <div class="admin-form-grid">
+                <label><span>Title</span><input name="title" type="text" placeholder="Brand Reveal - Creator Reel 2024" required/></label>
+                <label><span>Category</span>
+                  <select name="category">
+                    <option>Video Editing</option>
+                    <option>Thumbnail Series</option>
+                    <option>Brand Identity</option>
+                    <option>Photo Editing</option>
+                    <option>Social Creatives</option>
+                  </select>
+                </label>
+                <label><span>Color Theme</span>
+                  <select name="theme">
+                    <option value="ember">ember</option>
+                    <option value="midnight">midnight</option>
+                    <option value="forest">forest</option>
+                    <option value="ruby">ruby</option>
+                    <option value="ocean">ocean</option>
+                  </select>
+                </label>
+              </div>
+              <div class="admin-inline-actions">
+                <button type="submit" class="admin-submit">Add Work</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="admin-content-pane" data-content-pane="testimonials">
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Client</th><th>Role</th><th>Rating</th><th>Quote</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="testimonial-admin-list"></tbody>
+              </table>
+            </div>
+            <form class="admin-form admin-panel-stack" id="testimonial-form">
+              <label>
+                <span>Quote</span>
+                <textarea name="quote" placeholder="Working with Neatlyt felt like having an in-house creative director." required></textarea>
+              </label>
+              <div class="admin-form-grid">
+                <label><span>Client Name</span><input name="clientName" type="text" placeholder="Priya Sharma" required/></label>
+                <label><span>Role / Title</span><input name="role" type="text" placeholder="Founder, Bloom Skincare" required/></label>
+                <label><span>Star Rating</span>
+                  <select name="stars">
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                  </select>
+                </label>
+              </div>
+              <div class="admin-inline-actions">
+                <button type="submit" class="admin-submit">Add Testimonial</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </section>
+</div>
+
 <script>
-/* ── CURSOR ── */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
-animRing();
-document.querySelectorAll('a,button,.service-card,.port-item,.testi-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(201,168,76,0.7)'});
-  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(201,168,76,0.4)'});
+const isAdminRoute = document.documentElement.classList.contains('admin-route');
+
+const storageKey = 'neatlyt-content-manager-state';
+const authKey = 'neatlyt-admin-auth';
+const adminCredentials = { username: 'admin', password: 'neatlyt2026' };
+
+const themeGradients = {
+  ember: 'linear-gradient(135deg,#0f0e0a 0%,#1e1a0e 100%)',
+  midnight: 'linear-gradient(135deg,#0a0a12 0%,#12101e 100%)',
+  forest: 'linear-gradient(135deg,#0a0f0a 0%,#0f1a0f 100%)',
+  ruby: 'linear-gradient(135deg,#110a0a 0%,#1e1010 100%)',
+  ocean: 'linear-gradient(135deg,#0a0e14 0%,#0e1420 100%)'
+};
+
+const serviceIcons = {
+  screen: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg>',
+  play: '<svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>',
+  image: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1.5"/><path d="M21 16l-6-6-6 6-3-3-3 3"/></svg>',
+  layers: '<svg viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>'
+};
+
+const defaultState = {
+  services: [
+    { id: 'service-1', name: 'Thumbnail Design', description: 'Conversion-engineered visuals built to dominate search results, spike CTR, and hold attention before a single frame plays.', icon: 'screen' },
+    { id: 'service-2', name: 'Video Editing', description: 'Cinematic pacing, tight narrative structure, and platform-native hooks. We edit for retention metrics, not just aesthetics.', icon: 'play' },
+    { id: 'service-3', name: 'Photo Editing', description: 'Brand-coherent retouching, colour grading, and composite work that elevates every product shot, portrait, or campaign image.', icon: 'image' },
+    { id: 'service-4', name: 'Graphic Design', description: 'Logos, brand systems, social templates, and digital collateral. A complete visual language built to scale with your business.', icon: 'layers' }
+  ],
+  portfolio: [
+    { id: 'work-1', title: 'Brand Reveal - Creator Reel 2024', category: 'Video Editing', theme: 'ember' },
+    { id: 'work-2', title: 'YouTube Channel - 12-Part Series', category: 'Thumbnail Series', theme: 'midnight' },
+    { id: 'work-3', title: 'Logo and Visual System', category: 'Brand Identity', theme: 'forest' },
+    { id: 'work-4', title: 'E-Commerce Product Suite', category: 'Photo Editing', theme: 'ruby' },
+    { id: 'work-5', title: 'Instagram Content System', category: 'Social Creatives', theme: 'ocean' }
+  ],
+  testimonials: [
+    { id: 'testimonial-1', quote: 'Our thumbnail CTR went from 4.2% to 11.8% after the first batch. That is not design, that is revenue.', clientName: 'Arjun Mehta', role: 'YouTube Creator, 480K Subscribers', stars: 5 },
+    { id: 'testimonial-2', quote: 'Working with Neatlyt felt like having an in-house creative director. The quality and turnaround are unmatched.', clientName: 'Priya Sharma', role: 'Founder, Bloom Skincare', stars: 5 },
+    { id: 'testimonial-3', quote: 'Every deliverable is production-ready on first delivery. They understood our brand better than agencies three times the price.', clientName: 'Rahul Verma', role: 'Head of Content, GrowthLab', stars: 5 }
+  ]
+};
+
+function cloneDefaultState() {
+  return {
+    services: defaultState.services.map((item) => ({ ...item })),
+    portfolio: defaultState.portfolio.map((item) => ({ ...item })),
+    testimonials: defaultState.testimonials.map((item) => ({ ...item }))
+  };
+}
+
+function normalizeService(item, index) {
+  const fallback = defaultState.services[index % defaultState.services.length];
+  return {
+    id: item?.id || `service-${Date.now()}-${index}`,
+    name: item?.name || fallback.name,
+    description: item?.description || fallback.description,
+    icon: item?.icon || fallback.icon
+  };
+}
+
+function normalizePortfolio(item, index) {
+  const fallback = defaultState.portfolio[index % defaultState.portfolio.length];
+  return {
+    id: item?.id || `work-${Date.now()}-${index}`,
+    title: item?.title || fallback.title,
+    category: item?.category || fallback.category,
+    theme: item?.theme || fallback.theme
+  };
+}
+
+function normalizeTestimonial(item, index) {
+  const fallback = defaultState.testimonials[index % defaultState.testimonials.length];
+  return {
+    id: item?.id || `testimonial-${Date.now()}-${index}`,
+    quote: item?.quote || fallback.quote,
+    clientName: item?.clientName || fallback.clientName,
+    role: item?.role || fallback.role,
+    stars: Math.max(1, Math.min(5, Number(item?.stars) || fallback.stars || 5))
+  };
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (!raw) return cloneDefaultState();
+    const parsed = JSON.parse(raw);
+    return {
+      services: Array.isArray(parsed.services) && parsed.services.length ? parsed.services.map(normalizeService) : cloneDefaultState().services,
+      portfolio: Array.isArray(parsed.portfolio) && parsed.portfolio.length ? parsed.portfolio.map(normalizePortfolio) : cloneDefaultState().portfolio,
+      testimonials: Array.isArray(parsed.testimonials) && parsed.testimonials.length ? parsed.testimonials.map(normalizeTestimonial) : cloneDefaultState().testimonials
+    };
+  } catch (error) {
+    return cloneDefaultState();
+  }
+}
+
+let state = loadState();
+let serviceEditId = null;
+let currentPanel = 'content-manager';
+let currentContentTab = 'services';
+let adminUnlocked = false;
+
+const publicServicesGrid = document.querySelector('#services .services-grid');
+const publicPortfolioGrid = document.querySelector('#portfolio .portfolio-grid');
+const publicTestimonialsGrid = document.querySelector('#testimonials .testi-grid');
+
+const adminApp = document.getElementById('admin-app');
+const adminLoginScreen = document.getElementById('admin-login-screen');
+const adminDashboard = document.getElementById('admin-dashboard');
+const adminLoginForm = document.getElementById('admin-login-form');
+const adminLoginStatus = document.getElementById('admin-login-status');
+const adminBackLink = document.getElementById('admin-back-link');
+const adminCurrentPanel = document.getElementById('admin-current-panel');
+const adminViewSite = document.getElementById('admin-view-site');
+const adminSignOut = document.getElementById('admin-sign-out');
+const adminNavButtons = [...document.querySelectorAll('.admin-nav-button')];
+const adminPanelViews = [...document.querySelectorAll('.admin-panel-view')];
+const adminContentTabs = [...document.querySelectorAll('.admin-content-tab')];
+const adminContentPanes = [...document.querySelectorAll('.admin-content-pane')];
+const serviceAdminList = document.getElementById('service-admin-list');
+const portfolioAdminList = document.getElementById('portfolio-admin-list');
+const testimonialAdminList = document.getElementById('testimonial-admin-list');
+const serviceForm = document.getElementById('service-form');
+const portfolioForm = document.getElementById('portfolio-form');
+const testimonialForm = document.getElementById('testimonial-form');
+const serviceSubmit = document.getElementById('service-submit');
+const serviceCancel = document.getElementById('service-cancel');
+
+const nav = document.getElementById('nav');
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[character]));
+}
+
+function persistState() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch (error) {}
+}
+
+function starsMarkup(stars) {
+  const count = Math.max(1, Math.min(5, Number(stars) || 5));
+  return '★'.repeat(count) + '☆'.repeat(5 - count);
+}
+
+function getServiceIcon(icon) {
+  return serviceIcons[icon] || serviceIcons.screen;
+}
+
+function getPortfolioGradient(theme) {
+  return themeGradients[theme] || themeGradients.midnight;
+}
+
+function getPortfolioAspect(index) {
+  return ['16/10', '4/3', '1/1', '1/1', '1/1'][index] || '1/1';
+}
+
+function getPortfolioSpan(index) {
+  return [7, 5, 4, 4, 4][index] || 4;
+}
+
+function getPanelLabel(panel) {
+  return panel === 'content-manager' ? 'Content Manager' : 'Content Manager';
+}
+
+function isAdminAuthenticated() {
+  if (adminUnlocked) {
+    return true;
+  }
+  try {
+    return sessionStorage.getItem(authKey) === 'true';
+  } catch (error) {
+    return false;
+  }
+}
+
+function setAdminAuthenticated(value) {
+  adminUnlocked = Boolean(value);
+  try {
+    sessionStorage.setItem(authKey, value ? 'true' : 'false');
+  } catch (error) {}
+}
+
+function goPublicSite() {
+  window.location.search = '';
+}
+
+function goAdminRoute() {
+  const url = new URL(window.location.href);
+  url.search = '?admin';
+  window.location.href = url.toString();
+}
+
+function setAdminLoginStatus(message, type = 'error') {
+  if (!adminLoginStatus) return;
+  adminLoginStatus.textContent = message;
+  if (message) {
+    adminLoginStatus.dataset.state = type;
+  } else {
+    delete adminLoginStatus.dataset.state;
+  }
+}
+
+function attemptAdminLogin(username, password) {
+  const normalizedUsername = String(username || '').trim();
+  const normalizedPassword = String(password || '').trim();
+
+  if (normalizedUsername === adminCredentials.username && normalizedPassword === adminCredentials.password) {
+    setAdminAuthenticated(true);
+    return { ok: true };
+  }
+
+  return {
+    ok: false,
+    reason: `Login failed for "${normalizedUsername || '[empty]'}".`
+  };
+}
+
+function renderPublicServices() {
+  if (!publicServicesGrid) return;
+  if (!state.services.length) {
+    publicServicesGrid.innerHTML = '<div class="empty-state">No services are published right now.</div>';
+    return;
+  }
+  publicServicesGrid.innerHTML = state.services.map((item, index) => `
+    <div class="service-card">
+      <div class="service-card-num">${String(index + 1).padStart(2, '0')}</div>
+      <div class="service-card-icon">${getServiceIcon(item.icon)}</div>
+      <h3>${escapeHTML(item.name)}</h3>
+      <p>${escapeHTML(item.description)}</p>
+      <div class="service-card-link">Explore Service <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg></div>
+    </div>
+  `).join('');
+}
+
+function renderPublicPortfolio() {
+  if (!publicPortfolioGrid) return;
+  if (!state.portfolio.length) {
+    publicPortfolioGrid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">No portfolio items are published right now.</div>';
+    return;
+  }
+  publicPortfolioGrid.innerHTML = state.portfolio.map((item, index) => `
+    <div class="port-item" style="grid-column:span ${getPortfolioSpan(index)};aspect-ratio:${getPortfolioAspect(index)}">
+      <div class="port-visual" style="background:${getPortfolioGradient(item.theme)}">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <div class="port-overlay">
+        <div class="port-cat">${escapeHTML(item.category)}</div>
+        <div class="port-title">${escapeHTML(item.title)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPublicTestimonials() {
+  if (!publicTestimonialsGrid) return;
+  if (!state.testimonials.length) {
+    publicTestimonialsGrid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">No testimonials are published right now.</div>';
+    return;
+  }
+  publicTestimonialsGrid.innerHTML = state.testimonials.map((item) => `
+    <div class="testi-card">
+      <div class="testi-stars">${starsMarkup(item.stars)}</div>
+      <div class="testi-quote">"${escapeHTML(item.quote)}"</div>
+      <div class="testi-divider"></div>
+      <div class="testi-author-name">${escapeHTML(item.clientName)}</div>
+      <div class="testi-author-role">${escapeHTML(item.role)}</div>
+    </div>
+  `).join('');
+}
+
+function renderPublicSite() {
+  renderPublicServices();
+  renderPublicPortfolio();
+  renderPublicTestimonials();
+}
+
+function renderServiceTable() {
+  if (!serviceAdminList) return;
+  if (!state.services.length) {
+    serviceAdminList.innerHTML = '<tr><td colspan="4"><div class="empty-state">No services yet. Add the first one below.</div></td></tr>';
+    return;
+  }
+  serviceAdminList.innerHTML = state.services.map((item) => `
+    <tr>
+      <td>${escapeHTML(item.name)}</td>
+      <td><span class="admin-chip">${escapeHTML(item.icon || 'screen')}</span></td>
+      <td>${escapeHTML(item.description)}</td>
+      <td>
+        <div class="admin-inline-actions">
+          <button type="button" class="admin-action" data-action="edit-service" data-id="${escapeHTML(item.id)}">Edit</button>
+          <button type="button" class="admin-action danger" data-action="remove-service" data-id="${escapeHTML(item.id)}">Remove</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderPortfolioTable() {
+  if (!portfolioAdminList) return;
+  if (!state.portfolio.length) {
+    portfolioAdminList.innerHTML = '<tr><td colspan="4"><div class="empty-state">No work items yet. Add the first one below.</div></td></tr>';
+    return;
+  }
+  portfolioAdminList.innerHTML = state.portfolio.map((item) => `
+    <tr>
+      <td>${escapeHTML(item.title)}</td>
+      <td>${escapeHTML(item.category)}</td>
+      <td><span class="admin-chip">${escapeHTML(item.theme || 'midnight')}</span></td>
+      <td>
+        <div class="admin-inline-actions">
+          <button type="button" class="admin-action danger" data-action="remove-work" data-id="${escapeHTML(item.id)}">Remove</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderTestimonialTable() {
+  if (!testimonialAdminList) return;
+  if (!state.testimonials.length) {
+    testimonialAdminList.innerHTML = '<tr><td colspan="5"><div class="empty-state">No testimonials yet. Add the first one below.</div></td></tr>';
+    return;
+  }
+  testimonialAdminList.innerHTML = state.testimonials.map((item) => `
+    <tr>
+      <td>${escapeHTML(item.clientName)}</td>
+      <td>${escapeHTML(item.role)}</td>
+      <td><span class="admin-chip">${escapeHTML(String(item.stars))} stars</span></td>
+      <td>${escapeHTML(item.quote)}</td>
+      <td>
+        <div class="admin-inline-actions">
+          <button type="button" class="admin-action danger" data-action="remove-testimonial" data-id="${escapeHTML(item.id)}">Remove</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminTables() {
+  renderServiceTable();
+  renderPortfolioTable();
+  renderTestimonialTable();
+}
+
+function renderAll() {
+  renderPublicSite();
+  renderAdminTables();
+}
+
+function resetServiceForm() {
+  serviceEditId = null;
+  serviceForm.reset();
+  serviceForm.serviceIcon.value = 'screen';
+  serviceSubmit.textContent = 'Add Service';
+}
+
+function startServiceEdit(id) {
+  const item = state.services.find((service) => service.id === id);
+  if (!item) return;
+  serviceEditId = id;
+  serviceForm.serviceName.value = item.name;
+  serviceForm.serviceDescription.value = item.description;
+  serviceForm.serviceIcon.value = item.icon || 'screen';
+  serviceSubmit.textContent = 'Update Service';
+  serviceForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setCurrentPanel('content-manager');
+  setContentTab('services');
+}
+
+function removeService(id) {
+  state.services = state.services.filter((service) => service.id !== id);
+  if (serviceEditId === id) {
+    resetServiceForm();
+  }
+  persistState();
+  renderAll();
+}
+
+function addOrUpdateService(event) {
+  event.preventDefault();
+  const name = serviceForm.serviceName.value.trim();
+  const description = serviceForm.serviceDescription.value.trim();
+  const icon = serviceForm.serviceIcon.value;
+  if (!name || !description) return;
+
+  if (serviceEditId) {
+    state.services = state.services.map((service) => (
+      service.id === serviceEditId ? { ...service, name, description, icon } : service
+    ));
+  } else {
+    state.services = [...state.services, { id: `service-${Date.now()}`, name, description, icon }];
+  }
+
+  persistState();
+  renderAll();
+  resetServiceForm();
+}
+
+function addWork(event) {
+  event.preventDefault();
+  const title = portfolioForm.title.value.trim();
+  const category = portfolioForm.category.value.trim();
+  const theme = portfolioForm.theme.value;
+  if (!title || !category) return;
+
+  state.portfolio = [...state.portfolio, { id: `work-${Date.now()}`, title, category, theme }];
+  persistState();
+  renderAll();
+  portfolioForm.reset();
+  portfolioForm.theme.value = 'ember';
+}
+
+function addTestimonial(event) {
+  event.preventDefault();
+  const quote = testimonialForm.quote.value.trim();
+  const clientName = testimonialForm.clientName.value.trim();
+  const role = testimonialForm.role.value.trim();
+  const stars = Math.max(1, Math.min(5, Number(testimonialForm.stars.value) || 5));
+  if (!quote || !clientName || !role) return;
+
+  state.testimonials = [...state.testimonials, {
+    id: `testimonial-${Date.now()}`,
+    quote,
+    clientName,
+    role,
+    stars
+  }];
+  persistState();
+  renderAll();
+  testimonialForm.reset();
+  testimonialForm.stars.value = '5';
+}
+
+function setCurrentPanel(panel) {
+  currentPanel = panel;
+  adminNavButtons.forEach((button) => button.classList.toggle('active', button.dataset.panel === panel));
+  adminPanelViews.forEach((view) => {
+    view.classList.toggle('active', view.dataset.panelView === panel);
+  });
+  adminCurrentPanel.textContent = getPanelLabel(panel);
+}
+
+function setContentTab(tab) {
+  currentContentTab = tab;
+  adminContentTabs.forEach((button) => button.classList.toggle('active', button.dataset.contentTab === tab));
+  adminContentPanes.forEach((pane) => pane.classList.toggle('active', pane.dataset.contentPane === tab));
+}
+
+function showAdminLogin() {
+  adminApp.hidden = false;
+  adminApp.style.display = 'block';
+  adminLoginScreen.hidden = false;
+  adminLoginScreen.style.display = 'grid';
+  adminDashboard.hidden = true;
+  adminDashboard.style.display = 'none';
+  adminDashboard.classList.remove('is-active');
+  adminLoginStatus.textContent = '';
+}
+
+function showAdminDashboard() {
+  adminApp.hidden = false;
+  adminApp.style.display = 'block';
+  adminLoginScreen.hidden = true;
+  adminLoginScreen.style.display = 'none';
+  adminDashboard.hidden = false;
+  adminDashboard.style.display = 'grid';
+  adminDashboard.classList.add('is-active');
+  setCurrentPanel(currentPanel);
+  setContentTab(currentContentTab);
+}
+
+function syncAdminRouteState() {
+  if (!adminApp) return;
+  adminApp.hidden = !isAdminRoute;
+  if (!isAdminRoute) return;
+  if (isAdminAuthenticated()) {
+    showAdminDashboard();
+  } else {
+    showAdminLogin();
+  }
+}
+
+function enablePublicEffects() {
+  let mx = 0;
+  let my = 0;
+  let rx = 0;
+  let ry = 0;
+
+  if (cursor && cursorRing) {
+    document.addEventListener('mousemove', (event) => {
+      mx = event.clientX;
+      my = event.clientY;
+      cursor.style.left = `${mx}px`;
+      cursor.style.top = `${my}px`;
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cursorRing.style.left = `${rx}px`;
+      cursorRing.style.top = `${ry}px`;
+      requestAnimationFrame(animateRing);
+    }
+
+    animateRing();
+
+    document.querySelectorAll('a,button,.service-card,.port-item,.testi-card,input,textarea,select').forEach((element) => {
+      element.addEventListener('mouseenter', () => {
+        cursorRing.style.width = '56px';
+        cursorRing.style.height = '56px';
+        cursorRing.style.borderColor = 'rgba(201,168,76,0.7)';
+      });
+      element.addEventListener('mouseleave', () => {
+        cursorRing.style.width = '36px';
+        cursorRing.style.height = '36px';
+        cursorRing.style.borderColor = 'rgba(201,168,76,0.4)';
+      });
+    });
+  }
+
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), index * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+  document.addEventListener('keydown', (event) => {
+    if (!event.shiftKey || event.code !== 'KeyA') return;
+    if (document.activeElement && /input|textarea|select/i.test(document.activeElement.tagName)) return;
+    event.preventDefault();
+    goAdminRoute();
+  });
+}
+
+adminLoginForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const usernameInput = adminLoginForm.elements.namedItem('username');
+  const passwordInput = adminLoginForm.elements.namedItem('password');
+  const username = usernameInput ? String(usernameInput.value).trim() : '';
+  const password = passwordInput ? String(passwordInput.value).trim() : '';
+  const result = attemptAdminLogin(username, password);
+  console.info('[Neatlyt Admin] login attempt', { username, ok: result.ok });
+  if (result.ok) {
+    adminLoginForm.reset();
+    setAdminLoginStatus('');
+    showAdminDashboard();
+    return;
+  }
+  console.warn('[Neatlyt Admin] login rejected', result.reason);
+  setAdminLoginStatus('Invalid credentials. Please try again.');
 });
 
-/* ── NAV SCROLL ── */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>60);
+adminBackLink.addEventListener('click', (event) => {
+  event.preventDefault();
+  goPublicSite();
 });
 
-/* ── REVEAL ON SCROLL ── */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'),i*80);
-      obs.unobserve(e.target);
+adminViewSite.addEventListener('click', goPublicSite);
+
+adminSignOut.addEventListener('click', () => {
+  setAdminAuthenticated(false);
+  showAdminLogin();
+});
+
+adminNavButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    setCurrentPanel(button.dataset.panel);
+    if (button.dataset.panel === 'content-manager') {
+      setContentTab(currentContentTab);
     }
   });
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+
+adminContentTabs.forEach((button) => {
+  button.addEventListener('click', () => setContentTab(button.dataset.contentTab));
+});
+
+serviceAdminList.addEventListener('click', (event) => {
+  const action = event.target.closest('button');
+  if (!action) return;
+  const { action: actionType, id } = action.dataset;
+  if (actionType === 'edit-service') {
+    startServiceEdit(id);
+  }
+  if (actionType === 'remove-service') {
+    removeService(id);
+  }
+});
+
+portfolioAdminList.addEventListener('click', (event) => {
+  const action = event.target.closest('button');
+  if (!action || action.dataset.action !== 'remove-work') return;
+  state.portfolio = state.portfolio.filter((item) => item.id !== action.dataset.id);
+  persistState();
+  renderAll();
+});
+
+testimonialAdminList.addEventListener('click', (event) => {
+  const action = event.target.closest('button');
+  if (!action || action.dataset.action !== 'remove-testimonial') return;
+  state.testimonials = state.testimonials.filter((item) => item.id !== action.dataset.id);
+  persistState();
+  renderAll();
+});
+
+serviceForm.addEventListener('submit', addOrUpdateService);
+portfolioForm.addEventListener('submit', addWork);
+testimonialForm.addEventListener('submit', addTestimonial);
+serviceCancel.addEventListener('click', resetServiceForm);
+
+const hasAdminQuery = new URLSearchParams(window.location.search || '').has('admin');
+if (hasAdminQuery && !isAdminAuthenticated()) {
+  setAdminLoginStatus('');
+}
+
+renderAll();
+
+if (isAdminRoute) {
+  syncAdminRouteState();
+  if (isAdminAuthenticated()) {
+    showAdminDashboard();
+  }
+} else {
+  adminApp.hidden = true;
+  enablePublicEffects();
+}
 </script>
 </body>
 </html>
